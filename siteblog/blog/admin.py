@@ -5,6 +5,7 @@ from django.utils.safestring import mark_safe
 
 from .models import *
 
+
 class PostAdminForm(forms.ModelForm):
     content = forms.CharField(widget=CKEditorUploadingWidget())
 
@@ -25,7 +26,6 @@ class PostAdmin(admin.ModelAdmin):
     readonly_fields = ('views', 'created_at', 'get_photo')
     fields = ('title', 'slug','author', 'category', 'tags', 'content', 'photo','get_photo', 'views', 'created_at')
 
-
     def get_photo(self, obj):
         if obj.photo:
             return mark_safe(f'<img src="{obj.photo.url}" width="50">')
@@ -33,11 +33,13 @@ class PostAdmin(admin.ModelAdmin):
 
     get_photo.short_description = 'фото'
 
+
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
 
+
 class TagAdmin(admin.ModelAdmin):
-        prepopulated_fields = {"slug": ("title",)}
+    prepopulated_fields = {"slug": ("title",)}
 
 
 admin.site.register(Category, CategoryAdmin)
