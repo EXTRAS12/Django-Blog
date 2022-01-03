@@ -1,1 +1,5 @@
+.idea
 venv
+django_cache
+media/
+db.sqlite3

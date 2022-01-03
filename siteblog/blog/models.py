@@ -2,21 +2,6 @@ from django.db import models
 from django.urls import reverse
 
 
-'''
-Category
-=========
-title, slug
-
-Tag
-=========
-title, slug
-
-Post
-=========
-title, slug, author, content, created_at, photo, views, category, tags
-'''
-
-
 class Category(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, verbose_name='Url', unique=True)
