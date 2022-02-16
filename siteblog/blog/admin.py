@@ -7,6 +7,7 @@ from .models import *
 
 
 class PostAdminForm(forms.ModelForm):
+    """Подключили ckeditor"""
     content = forms.CharField(widget=CKEditorUploadingWidget())
 
     class Meta:
@@ -15,6 +16,7 @@ class PostAdminForm(forms.ModelForm):
 
 
 class PostAdmin(admin.ModelAdmin):
+    """Пост в админ"""
     prepopulated_fields = {"slug": ("title",)}
     form = PostAdminForm
     save_as = True
@@ -35,10 +37,12 @@ class PostAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
+    """Автозаполнение слага в категориях админ"""
     prepopulated_fields = {"slug": ("title",)}
 
 
 class TagAdmin(admin.ModelAdmin):
+    """Автозаполнение слага в тэгах админ"""
     prepopulated_fields = {"slug": ("title",)}
 
 

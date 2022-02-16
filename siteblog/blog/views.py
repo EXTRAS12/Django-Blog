@@ -4,6 +4,7 @@ from django.db.models import F
 
 
 class Home(ListView):
+    """Главная страница"""
     model = Post
     template_name = 'blog/index.html'
     context_object_name = 'posts'
@@ -16,6 +17,7 @@ class Home(ListView):
 
 
 class PostsByCategory(ListView):
+    """Вывод постов по категориям"""
     template_name = 'blog/index.html'
     context_object_name = 'posts'
     paginate_by = 4
@@ -25,12 +27,13 @@ class PostsByCategory(ListView):
         return Post.objects.filter(category__slug=self.kwargs['slug'])
 
     def get_context_data(self, *, object_list=None, **kwargs):
-            context = super().get_context_data(**kwargs)
-            context['title'] = Category.objects.get(slug=self.kwargs['slug'])
-            return context
+        context = super().get_context_data(**kwargs)
+        context['title'] = Category.objects.get(slug=self.kwargs['slug'])
+        return context
 
 
 class PostsByTag(ListView):
+    """Вывод по тэгу"""
     template_name = 'blog/index.html'
     context_object_name = 'posts'
     paginate_by = 4
@@ -40,12 +43,13 @@ class PostsByTag(ListView):
         return Post.objects.filter(tags__slug=self.kwargs['slug'])
 
     def get_context_data(self, *, object_list=None, **kwargs):
-            context = super().get_context_data(**kwargs)
-            context['title'] = 'Записи по тегу: ' + str(Tag.objects.get(slug=self.kwargs['slug']))
-            return context
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Записи по тегу: ' + str(Tag.objects.get(slug=self.kwargs['slug']))
+        return context
 
 
 class GetPost(DetailView):
+    """Страница отдельного поста"""
     model = Post
     template_name = 'blog/single.html'
     context_object_name = 'post'
@@ -59,6 +63,7 @@ class GetPost(DetailView):
 
 
 class Search(ListView):
+    """Страница поиска"""
     template_name = 'blog/search.html'
     context_object_name = 'posts'
     paginate_by = 4
